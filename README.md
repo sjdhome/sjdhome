@@ -15,7 +15,6 @@ I'm a frontend and AI-agent engineer based in Qingdao, China. At work I build br
 
 ### Writing
 
-- [I instrumented my own product and the data killed my favorite feature](https://koshell.ai/blog/the-data-killed-my-favorite-feature/): 21 days of usage data from Koshell, and why I stopped building the interaction I liked most.
 - [LLM 与信息熵](https://sjdhome.com/posts/llm-and-information-entropy/) (Chinese): an LLM is a probability cloud, not a wish-granting machine. Compression, transcription and completion as three ways information flows through it.
 - More at [sjdhome.com](https://sjdhome.com), mostly in Chinese.
 
