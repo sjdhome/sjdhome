@@ -1,28 +1,28 @@
 ## Hi, I'm sjdhome
 
-I'm a frontend and AI-agent engineer based in Qingdao, China. At work I build browser products with the Fyde & Phi team ([Phi Browser](https://phibrowser.com/), [FydeOS](https://fydeos.io/)). Outside work I make small tools for people who spend their day in a terminal next to an AI coding agent, and I write about how LLMs actually behave.
+I'm a frontend and AI-agent engineer based in Qingdao, China. At work I build browser products with the Fyde & Phi team ([Phi Browser](https://phibrowser.com/), [FydeOS](https://fydeos.io/)). Outside work, when something on my own machines misbehaves, I follow it down the stack until I can name the cause, send a fix or a reproducible report upstream, and write up how I got there.
 
-### What I'm building
+### Sent upstream
 
-- **[Koshell](https://koshell.ai)** ([source](https://github.com/koshell/koshell)) is a human-centric shared terminal. It wraps the shell you already use, turns command boundaries, exit codes and output into structured context an AI can read on demand, and leaves every command under your control. Rust front process, Bun agent daemon, JSONL over a Unix socket. Still early; I write up the design and the negative results as I go.
-- **[Teishoku](https://github.com/sjdhome/teishoku)** is a versioned, opinionated menu of engineering decisions that coding agents can read and pin to, so a project does not re-litigate its stack every week.
-
-### Smaller tools
-
-- [tmux-agent-watch](https://github.com/sjdhome/tmux-agent-watch): a read-only TUI that shows whether each AI coding agent in your tmux panes is working, blocked or idle.
-- [TmuxAgentWatch](https://github.com/sjdhome/TmuxAgentWatch): the same idea as a native macOS menu bar app.
-- [k380-keepalive](https://github.com/sjdhome/k380-keepalive): keeps a flaky Logitech K380 Bluetooth link alive on macOS.
+- **wlroots** ([!5483](https://gitlab.freedesktop.org/wlroots/wlroots/-/merge_requests/5483)): Sway could not light up any display after a long suspend. wlroots kept a stale CRTC assignment across suspend, so the kernel rejected every atomic commit after resume. The patch re-reads each connector's CRTC from the kernel when the session resumes.
+- **AeroSpace** ([pull requests](https://github.com/nikitabobko/AeroSpace/pulls?q=is%3Apr+author%3Asjdhome)): a series of focus fixes for the macOS tiling window manager, such as focus jumping after a click on another monitor and the MRU order getting lost when closed windows are restored. I run a build with these patches every day.
+- **Chromium** ([issue 586203821](https://issues.chromium.org/issues/586203821)): on Wayland, a tiled window that gets `window.resizeTo` or CDP `Browser.setWindowBounds` paints at the requested size in a corner of its tile and leaves the rest black. Found while testing my own upstream build under Sway.
+- **pi-subagents** ([#458](https://github.com/tintinweb/pi-subagents/issues/458)): `inherit_context` drops tool results and cannot reuse the parent's prompt cache. I proposed a `fork` agent type that continues the parent session instead of summarizing it, and I run one locally.
 
 ### Writing
 
-- [LLM 与信息熵](https://sjdhome.com/posts/llm-and-information-entropy/) (Chinese): an LLM is a probability cloud, not a wish-granting machine. Compression, transcription and completion as three ways information flows through it.
-- More at [sjdhome.com](https://sjdhome.com), mostly in Chinese.
+Mostly debugging write-ups, in Chinese, at [sjdhome.com](https://sjdhome.com):
+
+- [Sway 睡眠唤醒后双屏黑屏：wlroots 记错了 CRTC](https://sjdhome.com/posts/wlroots-stale-crtc-after-suspend/): the investigation behind the wlroots patch, wrong turns included.
+- [macOS 27 上 tmux 里 ssh 报 Undefined error: 0](https://sjdhome.com/posts/macos-tmux-ssh-undefined-error-0/): an error code that says nothing, traced to the local network permission of a terminal process that no longer exists.
+- [在 Mac 上用 UTM 直通 USB 硬盘跑 Ubuntu Server，并让 TRIM 生效](https://sjdhome.com/posts/utm-usb-passthrough-ubuntu-trim/) and [its cold-boot follow-up](https://sjdhome.com/posts/utm-usb-boot-disk-cold-start/): running a VM straight off an external NVMe drive with the USB passthrough added in macOS 27.
 
 ### How I work
 
-- TypeScript, React and Node / Bun day to day. Rust for the system-level pieces. Python and Go when they fit better.
+- TypeScript, React and Node / Bun day to day. Rust for system-level pieces, and I read C and C++ when the problem lives lower in the stack.
+- When something feels wrong, I would rather read the logs and reproduce it than argue from impression.
+- I work with AI coding agents every day, and my write-ups say which parts were mine and which were the agent's.
 - I prefer mature abstractions, type safety, tests and graceful degradation over clever code, and I keep a written trail of why decisions were made.
-- When something feels wrong, I would rather look at logs and reproduce it than argue from impression.
 
 ### Elsewhere
 
